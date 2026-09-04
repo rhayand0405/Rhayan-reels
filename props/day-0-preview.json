@@ -1,0 +1,38 @@
+{
+  "day": 0,
+  "totalDays": 90,
+  "dayLabel": "DAY",
+  "badgeFromSeconds": 3,
+  "segments": [
+    {"durationInSeconds": 3, "headline": "I'm 98 kilos. I'm 21.",
+     "media": {"src": "clips/IMG_4137 2.MOV", "type": "video", "startFrom": 0}},
+    {"durationInSeconds": 2, "caption": "This is me today",
+     "media": {"src": "clips/IMG_4135 2.MOV", "type": "video", "startFrom": 0}},
+    {"durationInSeconds": 1.5, "caption": "No angle, no flexing",
+     "media": {"src": "clips/IMG_4109 2.MOV", "type": "video", "startFrom": 0}},
+    {"durationInSeconds": 3, "caption": "98.4 kg",
+     "media": {"src": "clips/IMG_3981 2.MOV", "type": "video", "startFrom": 1}},
+    {"durationInSeconds": 2, "caption": "5 days in the gym",
+     "media": {"src": "clips/IMG_3954 2.MOV", "type": "video", "startFrom": 0}},
+    {"durationInSeconds": 2, "caption": "Cardio Saturday and Sunday",
+     "media": {"src": "clips/IMG_3828 2.mov", "type": "video", "startFrom": 0}},
+    {"durationInSeconds": 2, "caption": "I track everything I eat",
+     "media": {"src": "clips/IMG_3819 2.MOV", "type": "video", "startFrom": 0}},
+    {"durationInSeconds": 3, "caption": "I won't hide the bad days",
+     "media": {"src": "clips/IMG_3204 2.MOV", "type": "video", "startFrom": 0}},
+    {"durationInSeconds": 2.5, "caption": "You will see all of it",
+     "media": {"src": "clips/IMG_3198 2.MOV", "type": "video", "startFrom": 0}},
+    {"durationInSeconds": 3, "caption": "Day 0 of 90",
+     "media": {"src": "clips/IMG_2791 2.MOV", "type": "video", "startFrom": 0}}
+  ],
+  "outro": {
+    "title": "Let's see how far I can go",
+    "subtitle": "5x gym · 2x cardio · 90 days",
+    "stats": [
+      {"label": "Gym", "value": "5x"},
+      {"label": "Cardio", "value": "2x"},
+      {"label": "Days", "value": "90"}
+    ],
+    "durationInSeconds": 4
+  }
+}
