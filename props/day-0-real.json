@@ -1,0 +1,98 @@
+{
+  "day": 0,
+  "totalDays": 90,
+  "dayLabel": "DAY",
+  "badgeFromSeconds": 4,
+  "segments": [
+    {
+      "durationInSeconds": 4.5,
+      "headline": "I'm 21. I weigh 98 kilos.",
+      "media": {
+        "src": "clips/IMG_2744_3.mov",
+        "type": "video",
+        "startFrom": 1.5
+      }
+    },
+    {
+      "durationInSeconds": 3.5,
+      "media": {
+        "src": "clips/IMG_2791.MOV",
+        "type": "video",
+        "startFrom": 1.5
+      }
+    },
+    {
+      "durationInSeconds": 3,
+      "caption": "This is day 0",
+      "media": {
+        "src": "clips/IMG_2744_4.mov",
+        "type": "video",
+        "startFrom": 5
+      }
+    },
+    {
+      "durationInSeconds": 2.5,
+      "caption": "I track everything I eat",
+      "media": {
+        "src": "clips/IMG_3819.MOV",
+        "type": "video",
+        "startFrom": 0.5
+      }
+    },
+    {
+      "durationInSeconds": 3,
+      "caption": "No filters, no angles",
+      "media": {
+        "src": "clips/IMG_2777.mov",
+        "type": "video",
+        "startFrom": 1
+      }
+    },
+    {
+      "durationInSeconds": 3,
+      "caption": "I won't hide the bad days",
+      "media": {
+        "src": "clips/IMG_2557.MOV",
+        "type": "video",
+        "startFrom": 2
+      }
+    },
+    {
+      "durationInSeconds": 2.5,
+      "caption": "Good days and bad ones",
+      "media": {
+        "src": "clips/IMG_3198.MOV",
+        "type": "video",
+        "startFrom": 1
+      }
+    },
+    {
+      "durationInSeconds": 3.5,
+      "caption": "90 days. All of it filmed.",
+      "media": {
+        "src": "clips/IMG_2744_4.mov",
+        "type": "video",
+        "startFrom": 9
+      }
+    }
+  ],
+  "outro": {
+    "title": "Let's see how far I can go",
+    "subtitle": "5x gym \u00b7 2x cardio \u00b7 90 days",
+    "stats": [
+      {
+        "label": "Gym",
+        "value": "5x"
+      },
+      {
+        "label": "Cardio",
+        "value": "2x"
+      },
+      {
+        "label": "Days",
+        "value": "90"
+      }
+    ],
+    "durationInSeconds": 4
+  }
+}
