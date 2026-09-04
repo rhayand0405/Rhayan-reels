@@ -1,0 +1,31 @@
+{
+  "name": "rhayan-reels",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Remotion project for generating vertical short-form videos (Reels / TikToks / Shorts)",
+  "scripts": {
+    "dev": "remotion studio",
+    "studio": "remotion studio",
+    "render": "remotion render",
+    "still": "remotion still",
+    "compositions": "remotion compositions",
+    "upgrade": "remotion upgrade",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.520",
+    "@remotion/google-fonts": "4.0.520",
+    "@remotion/media-utils": "4.0.520",
+    "@remotion/transitions": "4.0.520",
+    "@remotion/zod-types": "4.0.520",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "remotion": "4.0.520",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/react": "19.0.0",
+    "@types/web": "0.0.166",
+    "typescript": "5.8.2"
+  }
+}
