@@ -2,3 +2,9 @@ node_modules
 out
 .env
 .DS_Store
+
+# Raw footage and audio. Too big for git; keep originals outside the repo.
+public/clips/*
+public/music/*
+!public/clips/.gitkeep
+!public/music/.gitkeep

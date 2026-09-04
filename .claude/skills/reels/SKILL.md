@@ -27,7 +27,7 @@ driven entirely by props — so a new reel is usually a new props file, not new 
 ## Making a reel
 
 1. Put footage in `public/` (e.g. `public/clips/gym-2026-09-04.mp4`, `public/music/track.mp3`).
-2. Write a props JSON file under `props/` (create the folder if needed):
+2. Write a props JSON file under `props/`:
 
 ```json
 {
@@ -98,3 +98,21 @@ Props (`challengeSchema` in `src/schema.ts`): `day`, `totalDays`, `dayLabel`, `t
 
 A new day is a new props file with a new `day` and new segments — nothing else changes.
 The ring fills to `day / totalDays` on its own, so day 0 correctly shows an empty ring.
+
+## Where files go
+
+```
+public/clips/    footage and photos   -> referenced as "clips/name.mp4"
+public/music/    music and voiceover  -> referenced as "music/name.mp3"
+props/           one JSON per video   -> passed with --props=props/name.json
+out/             rendered mp4s        -> gitignored, never committed
+```
+
+Paths inside props are relative to `public/`, so `public/clips/day0-front.mp4`
+is written as `"clips/day0-front.mp4"`. Full `https://` URLs also work.
+
+`public/clips/` and `public/music/` are gitignored — raw footage is too big for
+git. The props JSON files ARE committed, so a video is reproducible from its
+props plus the original footage.
+
+`props/day-0.json` is a filled-in template: replace the filenames with real ones.
