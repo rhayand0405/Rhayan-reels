@@ -37,3 +37,13 @@ Drop footage, images and music into `public/` and reference them by relative pat
 - `.agents/skills/*` — HyperFrames skills (HTML → MP4), for motion-graphics-style videos.
 
 See `CLAUDE.md` for when to use which.
+
+## Adding footage
+
+```bash
+./scripts/add-clip.sh day0-front ~/Desktop/IMG_4821.MOV
+```
+
+Copies the file into `public/clips/` under that name, converting iPhone
+HEVC/.MOV to H.264 mp4 and .HEIC to jpg. Then reference it in props as
+`"clips/day0-front.mp4"`.

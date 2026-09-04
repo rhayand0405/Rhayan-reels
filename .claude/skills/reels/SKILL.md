@@ -116,3 +116,17 @@ git. The props JSON files ARE committed, so a video is reproducible from its
 props plus the original footage.
 
 `props/day-0.json` is a filled-in template: replace the filenames with real ones.
+
+## Adding footage from the terminal
+
+`scripts/add-clip.sh` copies a file into `public/clips/` under the name the props
+file expects, and transcodes iPhone footage on the way in:
+
+```bash
+./scripts/add-clip.sh day0-front ~/Desktop/IMG_4821.MOV
+```
+
+It converts .MOV/HEVC to H.264 mp4 and .HEIC to jpg. Chromium cannot decode HEVC,
+so an untranscoded iPhone .MOV renders as a black frame with no error — if a clip
+comes out black, that is the cause. Needs `ffmpeg` (brew install ffmpeg) for
+anything that is not already an mp4.
