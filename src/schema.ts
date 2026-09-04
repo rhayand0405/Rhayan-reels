@@ -32,3 +32,32 @@ export const reelSchema = z.object({
 
 export type ReelProps = z.infer<typeof reelSchema>;
 export type Segment = z.infer<typeof segmentSchema>;
+
+export const statSchema = z.object({
+  label: z.string(),
+  value: z.string(),
+});
+
+export const challengeSchema = z.object({
+  // Which day of the challenge this reel is. 0 = the before, the starting line.
+  day: z.number().min(0),
+  totalDays: z.number().min(1).default(90),
+  // Word above the number inside the ring.
+  dayLabel: z.string().default('DIA'),
+  // Big line under the badge during the intro.
+  title: z.string(),
+  subtitle: z.string().optional(),
+  // Starting numbers: weight, body fat, whatever is being tracked.
+  stats: z.array(statSchema).default([]),
+  introDurationInSeconds: z.number().min(2).default(4.5),
+  // Optional footage behind the intro card. Dimmed so the badge stays readable.
+  introMedia: mediaSchema.optional(),
+  segments: z.array(segmentSchema),
+  music: z
+    .object({src: z.string(), volume: z.number().min(0).max(1).default(0.25)})
+    .optional(),
+  voiceover: z.object({src: z.string()}).optional(),
+});
+
+export type ChallengeProps = z.infer<typeof challengeSchema>;
+export type Stat = z.infer<typeof statSchema>;

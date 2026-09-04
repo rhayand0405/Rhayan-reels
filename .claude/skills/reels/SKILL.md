@@ -79,3 +79,22 @@ The composition length is computed from the segments — never set `durationInFr
 npm run typecheck
 npx remotion render Reel out/smoke-test.mp4   # must produce a non-empty mp4
 ```
+
+## Challenge composition (Day X / 90)
+
+`Challenge` is the second composition — a day counter reel for a multi-day challenge.
+
+```bash
+npx remotion render Challenge out/day-07.mp4 --props=props/day-07.json
+```
+
+Structure: an intro card where an odometer counter rolls to the day number inside a
+progress ring, with the title and the tracked stats under it; then the counter shrinks
+into a corner badge in one continuous move and stays there over the footage.
+
+Props (`challengeSchema` in `src/schema.ts`): `day`, `totalDays`, `dayLabel`, `title`,
+`subtitle`, `stats[]`, `introDurationInSeconds`, `introMedia`, `segments[]`, `music`.
+`src/examples/day-0.ts` is the day 0 version.
+
+A new day is a new props file with a new `day` and new segments — nothing else changes.
+The ring fills to `day / totalDays` on its own, so day 0 correctly shows an empty ring.
