@@ -15,6 +15,9 @@ export const segmentSchema = z.object({
   media: mediaSchema.optional(),
   // Burned-in caption for this segment. Keep it to ~6 words.
   caption: z.string().optional(),
+  // Big centred line instead of a bottom caption. For the opening claim only —
+  // one per video, or it stops meaning anything.
+  headline: z.string().optional(),
 });
 
 export const reelSchema = z.object({
@@ -43,20 +46,24 @@ export const challengeSchema = z.object({
   day: z.number().min(0),
   totalDays: z.number().min(1).default(90),
   // Word above the number inside the ring.
-  dayLabel: z.string().default('DIA'),
-  // Big line under the badge during the intro.
-  title: z.string(),
-  subtitle: z.string().optional(),
-  // Starting numbers: weight, body fat, whatever is being tracked.
-  stats: z.array(statSchema).default([]),
-  introDurationInSeconds: z.number().min(2).default(4.5),
-  // Optional footage behind the intro card. Dimmed so the badge stays readable.
-  introMedia: mediaSchema.optional(),
+  dayLabel: z.string().default('DAY'),
+  // The footage carries the opening — the counter is the payoff, not the hook.
   segments: z.array(segmentSchema),
+  // Seconds before the small corner badge fades in. Keep the first shot clean.
+  badgeFromSeconds: z.number().min(0).default(1.5),
+  // The closing card the badge grows into.
+  outro: z.object({
+    title: z.string(),
+    subtitle: z.string().optional(),
+    stats: z.array(statSchema).default([]),
+    durationInSeconds: z.number().min(1.5).default(4),
+  }),
   music: z
     .object({src: z.string(), volume: z.number().min(0).max(1).default(0.25)})
     .optional(),
-  voiceover: z.object({src: z.string()}).optional(),
+  voiceover: z
+    .object({src: z.string(), volume: z.number().min(0).max(1).default(1)})
+    .optional(),
 });
 
 export type ChallengeProps = z.infer<typeof challengeSchema>;

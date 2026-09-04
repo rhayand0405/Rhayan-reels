@@ -12,6 +12,7 @@ import {
 } from 'remotion';
 import {BADGE_BOX, DayBadge} from '../components/DayBadge';
 import {Caption} from '../components/Caption';
+import {Headline} from '../components/Headline';
 import {Media} from '../components/Media';
 import {StatRow} from '../components/StatRow';
 import {theme} from '../theme';
@@ -43,37 +44,43 @@ const Scrim: React.FC = () => (
   </AbsoluteFill>
 );
 
-// Where the badge sits while it owns the frame, and where it parks once the
-// footage takes over. Laid out from the hero box's top-left corner.
+// The badge's two homes: a small mark in the corner while the footage runs,
+// and the closing card it grows into.
 const HERO_LEFT = (1080 - BADGE_BOX) / 2;
-const HERO_TOP = 500;
+const HERO_TOP = 560;
 const PARKED_LEFT = 56;
 const PARKED_TOP = 120;
 const PARKED_SCALE = 0.3;
-const PARK_FRAMES = 16;
+const GROW_FRAMES = 20;
 
-// Badge hero -> corner badge. One continuous move: the number never cuts,
-// it shrinks out of the way and keeps counting for the rest of the video.
+// Corner mark for the length of the film, then it grows into the closing card.
+// One continuous move — the number never cuts.
 const TravellingBadge: React.FC<{
   day: number;
   totalDays: number;
   dayLabel: string;
-  parkStart: number;
-}> = ({day, totalDays, dayLabel, parkStart}) => {
+  appearAt: number;
+  growStart: number;
+}> = ({day, totalDays, dayLabel, appearAt, growStart}) => {
   const frame = useCurrentFrame();
 
-  const park = interpolate(frame, [parkStart, parkStart + PARK_FRAMES], [0, 1], {
+  const appear = interpolate(frame, [appearAt, appearAt + 10], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
-    easing: Easing.bezier(0.7, 0, 0.2, 1),
   });
 
-  const x = interpolate(park, [0, 1], [0, PARKED_LEFT - HERO_LEFT]);
-  const y = interpolate(park, [0, 1], [0, PARKED_TOP - HERO_TOP]);
-  const scale = interpolate(park, [0, 1], [1, PARKED_SCALE]);
+  const grow = interpolate(frame, [growStart, growStart + GROW_FRAMES], [0, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+    easing: Easing.bezier(0.6, 0, 0.2, 1),
+  });
+
+  const x = interpolate(grow, [0, 1], [PARKED_LEFT - HERO_LEFT, 0]);
+  const y = interpolate(grow, [0, 1], [PARKED_TOP - HERO_TOP, 0]);
+  const scale = interpolate(grow, [0, 1], [PARKED_SCALE, 1]);
 
   return (
-    <AbsoluteFill>
+    <AbsoluteFill style={{opacity: appear}}>
       <div
         style={{
           position: 'absolute',
@@ -89,75 +96,77 @@ const TravellingBadge: React.FC<{
   );
 };
 
-// Title, subtitle and stats. They belong to the intro only and clear out as
-// the badge parks.
-const IntroText: React.FC<{
+// The closing card behind the grown badge. Nothing here competes with the
+// number — the line and the commitments land under it.
+const OutroCard: React.FC<{
   title: string;
   subtitle?: string;
-  stats: ChallengeProps['stats'];
-  parkStart: number;
-}> = ({title, subtitle, stats, parkStart}) => {
+  stats: ChallengeProps['outro']['stats'];
+}> = ({title, subtitle, stats}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
 
+  const wash = interpolate(frame, [0, 12], [0, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
   const enter = spring({
-    frame: frame - 22,
+    frame: frame - 16,
     fps,
     config: {damping: 200},
     durationInFrames: 16,
   });
-  const leave = interpolate(frame, [parkStart - 4, parkStart + 8], [1, 0], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
 
   return (
-    <AbsoluteFill
-      style={{
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        paddingBottom: theme.safeBottom,
-        opacity: enter * leave,
-      }}
-    >
-      <div
+    <AbsoluteFill>
+      <AbsoluteFill style={{backgroundColor: `rgba(8,9,11,${wash})`}} />
+      <AbsoluteFill
         style={{
-          fontFamily: theme.fontFamily,
-          color: theme.text,
-          fontSize: 78,
-          fontWeight: 900,
-          textAlign: 'center',
-          lineHeight: 1.05,
-          textShadow: theme.shadow,
-          transform: `translateY(${interpolate(enter, [0, 1], [30, 0])}px)`,
-          padding: '0 70px',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          paddingBottom: theme.safeBottom,
+          opacity: enter,
         }}
       >
-        {title}
-      </div>
-
-      {subtitle ? (
         <div
           style={{
             fontFamily: theme.fontFamily,
             color: theme.text,
-            fontSize: 36,
-            fontWeight: 600,
-            opacity: 0.7,
-            marginTop: 18,
+            fontSize: 72,
+            fontWeight: 900,
             textAlign: 'center',
-            padding: '0 80px',
+            lineHeight: 1.05,
+            padding: '0 70px',
+            textShadow: theme.shadow,
+            transform: `translateY(${interpolate(enter, [0, 1], [26, 0])}px)`,
           }}
         >
-          {subtitle}
+          {title}
         </div>
-      ) : null}
 
-      {stats.length > 0 ? (
-        <div style={{marginTop: 56}}>
-          <StatRow stats={stats} delay={34} />
-        </div>
-      ) : null}
+        {subtitle ? (
+          <div
+            style={{
+              fontFamily: theme.fontFamily,
+              color: theme.text,
+              fontSize: 34,
+              fontWeight: 600,
+              opacity: 0.68,
+              marginTop: 16,
+              textAlign: 'center',
+              padding: '0 80px',
+            }}
+          >
+            {subtitle}
+          </div>
+        ) : null}
+
+        {stats.length > 0 ? (
+          <div style={{marginTop: 52}}>
+            <StatRow stats={stats} delay={26} />
+          </div>
+        ) : null}
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };
@@ -166,21 +175,16 @@ export const Challenge: React.FC<ChallengeProps> = ({
   day,
   totalDays,
   dayLabel,
-  title,
-  subtitle,
-  stats,
-  introDurationInSeconds,
-  introMedia,
   segments,
+  badgeFromSeconds,
+  outro,
   music,
   voiceover,
 }) => {
   const {fps} = useVideoConfig();
-  const introFrames = Math.round(introDurationInSeconds * fps);
-  const parkStart = introFrames - PARK_FRAMES;
 
-  // Segments run back to back after the intro card.
-  let cursor = introFrames;
+  // Footage runs from frame 0 — the opening shot is the hook, not a title card.
+  let cursor = 0;
   const placed = segments.map((segment) => {
     const from = cursor;
     const durationInFrames = Math.round(segment.durationInSeconds * fps);
@@ -188,52 +192,57 @@ export const Challenge: React.FC<ChallengeProps> = ({
     return {segment, from, durationInFrames};
   });
 
+  const bodyFrames = cursor;
+  const outroFrames = Math.round(outro.durationInSeconds * fps);
+
   return (
     <AbsoluteFill style={{backgroundColor: '#08090b'}}>
-      <Sequence durationInFrames={introFrames} name="Intro">
-        {introMedia ? (
-          <>
-            <Media media={introMedia} />
-            {/* Dim the footage so the ring and the number stay readable. */}
-            <AbsoluteFill style={{backgroundColor: 'rgba(0,0,0,0.55)'}} />
-          </>
-        ) : null}
-        <IntroText
-          title={title}
-          subtitle={subtitle}
-          stats={stats}
-          parkStart={parkStart}
-        />
-      </Sequence>
-
       {placed.map(({segment, from, durationInFrames}, i) => (
-        <Sequence key={i} from={from} durationInFrames={durationInFrames} name={`Scene ${i + 1}`}>
+        <Sequence
+          key={i}
+          from={from}
+          durationInFrames={durationInFrames}
+          name={`Scene ${i + 1}`}
+        >
           {segment.media ? <Media media={segment.media} /> : null}
           {segment.media ? <Scrim /> : null}
+          {segment.headline ? <Headline text={segment.headline} /> : null}
           {segment.caption ? <Caption text={segment.caption} /> : null}
         </Sequence>
       ))}
+
+      {/* The last shot holds under the closing card instead of cutting to black. */}
+      <Sequence from={bodyFrames} durationInFrames={outroFrames} name="Outro">
+        <OutroCard
+          title={outro.title}
+          subtitle={outro.subtitle}
+          stats={outro.stats}
+        />
+      </Sequence>
 
       <TravellingBadge
         day={day}
         totalDays={totalDays}
         dayLabel={dayLabel}
-        parkStart={parkStart}
+        appearAt={Math.round(badgeFromSeconds * fps)}
+        growStart={bodyFrames}
       />
 
       {music ? <Audio src={resolve(music.src)} volume={music.volume} loop /> : null}
-      {voiceover ? <Audio src={resolve(voiceover.src)} /> : null}
+      {voiceover ? (
+        <Audio src={resolve(voiceover.src)} volume={voiceover.volume} />
+      ) : null}
     </AbsoluteFill>
   );
 };
 
-// Intro card plus every scene.
+// Every scene, plus the closing card.
 export const challengeDurationInFrames = (props: ChallengeProps, fps: number) =>
   Math.max(
     1,
     Math.round(
-      (props.introDurationInSeconds +
-        props.segments.reduce((total, s) => total + s.durationInSeconds, 0)) *
+      (props.segments.reduce((total, s) => total + s.durationInSeconds, 0) +
+        props.outro.durationInSeconds) *
         fps,
     ),
   );

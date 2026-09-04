@@ -1,40 +1,38 @@
 {
   "day": 0,
   "totalDays": 90,
-  "dayLabel": "DIA",
-  "title": "RETO 90 DIAS",
-  "subtitle": "Empieza hoy. Todo grabado.",
-  "stats": [
-    {"label": "Peso", "value": "94 kg"},
-    {"label": "Meta", "value": "84 kg"},
-    {"label": "Entrenos", "value": "5/sem"}
-  ],
-  "introDurationInSeconds": 4.5,
-  "introMedia": {
-    "src": "clips/IMG_4137 2.MOV",
-    "type": "video",
-    "startFrom": 0
-  },
+  "dayLabel": "DAY",
+  "badgeFromSeconds": 3,
   "segments": [
-    {
-      "durationInSeconds": 2.6,
-      "caption": "Hoy empieza el reto",
-      "media": {"src": "clips/IMG_4135 2.MOV", "type": "video", "startFrom": 0}
-    },
-    {
-      "durationInSeconds": 2.6,
-      "caption": "90 dias grabando todo",
-      "media": {"src": "clips/IMG_4109 2.MOV", "type": "video", "startFrom": 0}
-    },
-    {
-      "durationInSeconds": 2.6,
-      "caption": "Sin excusas",
-      "media": {"src": "clips/IMG_3981 2.MOV", "type": "video", "startFrom": 1}
-    },
-    {
-      "durationInSeconds": 2.6,
-      "caption": "Dia 90 nos vemos aqui",
-      "media": {"src": "clips/IMG_3954 2.MOV", "type": "video", "startFrom": 0}
-    }
-  ]
+    {"durationInSeconds": 3, "headline": "I'm 98 kilos. I'm 21.",
+     "media": {"src": "clips/REPLACE-front.MOV", "type": "video", "startFrom": 0}},
+    {"durationInSeconds": 2, "caption": "This is me today",
+     "media": {"src": "clips/REPLACE-side.MOV", "type": "video", "startFrom": 0}},
+    {"durationInSeconds": 1.5, "caption": "No angle, no flexing",
+     "media": {"src": "clips/REPLACE-back.MOV", "type": "video", "startFrom": 0}},
+    {"durationInSeconds": 3, "caption": "98.4 kg",
+     "media": {"src": "clips/REPLACE-scale.MOV", "type": "video", "startFrom": 0}},
+    {"durationInSeconds": 2, "caption": "5 days in the gym",
+     "media": {"src": "clips/IMG_4137 2.MOV", "type": "video", "startFrom": 0}},
+    {"durationInSeconds": 2, "caption": "Cardio Saturday and Sunday",
+     "media": {"src": "clips/REPLACE-walking.MOV", "type": "video", "startFrom": 0}},
+    {"durationInSeconds": 2, "caption": "I track everything I eat",
+     "media": {"src": "clips/REPLACE-food.MOV", "type": "video", "startFrom": 0}},
+    {"durationInSeconds": 3, "caption": "I won't hide the bad days",
+     "media": {"src": "clips/REPLACE-tired.MOV", "type": "video", "startFrom": 0}},
+    {"durationInSeconds": 2.5, "caption": "You will see all of it",
+     "media": {"src": "clips/IMG_4135 2.MOV", "type": "video", "startFrom": 0}},
+    {"durationInSeconds": 3, "caption": "Day 0 of 90",
+     "media": {"src": "clips/REPLACE-mirror.MOV", "type": "video", "startFrom": 0}}
+  ],
+  "outro": {
+    "title": "Let's see how far I can go",
+    "subtitle": "98 kg → 85 kg",
+    "stats": [
+      {"label": "Gym", "value": "5x"},
+      {"label": "Cardio", "value": "2x"},
+      {"label": "Days", "value": "90"}
+    ],
+    "durationInSeconds": 4
+  }
 }
