@@ -20,6 +20,29 @@ import type {ChallengeProps} from '../schema';
 const resolve = (src: string) =>
   src.startsWith('http') ? src : staticFile(src);
 
+// Bright footage — a gym ceiling, daylight, a white wall — washes out white
+// text. These gradients sit between the footage and the text so captions and
+// the badge stay readable without dimming the whole shot.
+const Scrim: React.FC = () => (
+  <AbsoluteFill style={{pointerEvents: 'none'}}>
+    <AbsoluteFill
+      style={{
+        height: 420,
+        background:
+          'linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0))',
+      }}
+    />
+    <AbsoluteFill
+      style={{
+        top: 'auto',
+        bottom: 0,
+        height: 680,
+        background: 'linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0))',
+      }}
+    />
+  </AbsoluteFill>
+);
+
 // Where the badge sits while it owns the frame, and where it parks once the
 // footage takes over. Laid out from the hero box's top-left corner.
 const HERO_LEFT = (1080 - BADGE_BOX) / 2;
@@ -186,6 +209,7 @@ export const Challenge: React.FC<ChallengeProps> = ({
       {placed.map(({segment, from, durationInFrames}, i) => (
         <Sequence key={i} from={from} durationInFrames={durationInFrames} name={`Scene ${i + 1}`}>
           {segment.media ? <Media media={segment.media} /> : null}
+          {segment.media ? <Scrim /> : null}
           {segment.caption ? <Caption text={segment.caption} /> : null}
         </Sequence>
       ))}

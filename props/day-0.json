@@ -3,7 +3,7 @@
   "totalDays": 90,
   "dayLabel": "DIA",
   "title": "RETO 90 DIAS",
-  "subtitle": "Sin excusas. Todo grabado.",
+  "subtitle": "Empieza hoy. Todo grabado.",
   "stats": [
     {"label": "Peso", "value": "94 kg"},
     {"label": "Meta", "value": "84 kg"},
@@ -11,31 +11,30 @@
   ],
   "introDurationInSeconds": 4.5,
   "introMedia": {
-    "src": "clips/day0-intro.mp4",
+    "src": "clips/IMG_4137 2.MOV",
     "type": "video",
     "startFrom": 0
   },
   "segments": [
     {
-      "durationInSeconds": 2.5,
-      "caption": "Este soy yo hoy",
-      "media": {"src": "clips/day0-front.mp4", "type": "video", "startFrom": 0}
+      "durationInSeconds": 2.6,
+      "caption": "Hoy empieza el reto",
+      "media": {"src": "clips/IMG_4135 2.MOV", "type": "video", "startFrom": 0}
     },
     {
-      "durationInSeconds": 2.5,
-      "caption": "94kg y sin definicion",
-      "media": {"src": "clips/day0-side.jpg", "type": "image", "zoom": 1.12}
-    },
-    {
-      "durationInSeconds": 2.5,
+      "durationInSeconds": 2.6,
       "caption": "90 dias grabando todo",
-      "media": {"src": "clips/day0-gym.mp4", "type": "video", "startFrom": 3}
+      "media": {"src": "clips/IMG_4109 2.MOV", "type": "video", "startFrom": 0}
     },
     {
-      "durationInSeconds": 2.5,
+      "durationInSeconds": 2.6,
+      "caption": "Sin excusas",
+      "media": {"src": "clips/IMG_3981 2.MOV", "type": "video", "startFrom": 1}
+    },
+    {
+      "durationInSeconds": 2.6,
       "caption": "Dia 90 nos vemos aqui",
-      "media": {"src": "clips/day0-outro.mp4", "type": "video", "startFrom": 0}
+      "media": {"src": "clips/IMG_3954 2.MOV", "type": "video", "startFrom": 0}
     }
-  ],
-  "music": {"src": "music/day0.mp3", "volume": 0.25}
+  ]
 }
